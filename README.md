@@ -1,5 +1,5 @@
 # JMac
-JMac, or Java-Macro, is a project to try and bring [Rust's `macro_rules!` to Java](https://doc.rust-lang.org/rust-by-example/macros.html).
+JMac, or Java-Macro, is a project to try and bring [Rust's `macro_rules!`](https://doc.rust-lang.org/rust-by-example/macros.html) to Java.
 
 ## How does it work
 When you have JMac added as a [Gradle](https://gradle.org/) plugin and configured, and invoke the `jar` task, JMac's preprocessor will run and as the name implies, preprocess your Java source files. Much like the [C Preprocessor](https://en.wikipedia.org/wiki/C_preprocessor).
