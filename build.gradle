@@ -1,0 +1,17 @@
+plugins {
+    id 'java-gradle-plugin'
+    id 'eclipse'
+    id 'maven-publish'
+}
+
+group 'dev.array21'
+version '0.0.1-a'
+
+gradlePlugin {
+    plugins {
+        jmac {
+            id = 'dev.array21.jmac'
+            implementationClass = 'dev.array21.jmac.JMac'
+        }
+    }
+}

@@ -1,0 +1,4 @@
+plugins {
+    id 'java'
+    id 'dev.array21.jmac' version '0.0.1-a'
+}
