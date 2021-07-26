@@ -1,17 +1,21 @@
 package dev.array21.test;
 
-macro_rules! testMacro {
-    body {
-        {
+int x(){ 
+    return 1;
+}
 
+macro_rules! handleA {
+    ($a:expr) => {
+        if($a.equals("a")) {
+            return 0;
+        }
+
+        if($a.equals("b")) {
+            return 1;
         }
     }
 }
 
-macro_rules! anotherMacro {
-    ADifferentBody() {
-        {
-            []
-        }
-    }
+int y(){ 
+    return 1;
 }

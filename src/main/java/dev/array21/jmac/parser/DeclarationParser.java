@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 import dev.array21.jmac.exception.MacroSyntaxException;
 import dev.array21.jmac.parser.components.MacroContext;
 
-public class FileMacroDeclarationParser {
+public class DeclarationParser {
 	
 	private static final Pattern MACRO_NAME_REGEX = Pattern.compile("[a-zA-Z._-]*$");
 	
@@ -92,11 +92,11 @@ public class FileMacroDeclarationParser {
 				return;
 			}
 			
-			if(line.contains("{")) {
+			if(line.contains("{") && inMacroDefinition.get()) {
 				bracketCount.incrementAndGet();
 			}
 			
-			if(line.contains("}")) {
+			if(line.contains("}") && inMacroDefinition.get()) {
 				int localBracketCount = bracketCount.decrementAndGet();
 				
 				// When the brackCount reaches '0' we've reached the end of the macro declaration
@@ -117,6 +117,8 @@ public class FileMacroDeclarationParser {
 			if(inMacroDefinition.get()) {
 				macroBody.add(line);
 			}
+			
+			return;
 		});
 		
 		buffReader.close();

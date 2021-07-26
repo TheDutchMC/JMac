@@ -10,8 +10,10 @@ import org.gradle.api.plugins.JavaPluginConvention;
 import org.gradle.api.tasks.SourceSet;
 import org.gradle.api.tasks.TaskAction;
 
-import dev.array21.jmac.parser.FileMacroDeclarationParser;
+import dev.array21.jmac.parser.DeclarationParser;
+import dev.array21.jmac.parser.StructureParser;
 import dev.array21.jmac.parser.components.MacroContext;
+import dev.array21.jmac.parser.components.MacroStructure;
 
 public class JMac implements Plugin<Project> {
 	
@@ -25,15 +27,31 @@ public class JMac implements Plugin<Project> {
 		List<MacroContext> macros = new ArrayList<>();
 		
 		SourceSet mainSourceSet = this.project.getConvention().getPlugin(JavaPluginConvention.class).getSourceSets().getByName(this.sourceSetName);
+		
+		System.out.println("Declaration parsing...");
+		
 		mainSourceSet.getAllJava().forEach(javaFile -> {
 			try {
-				MacroContext[] macrosInFile = FileMacroDeclarationParser.findMacroDeclarations(javaFile);
+				MacroContext[] macrosInFile = DeclarationParser.findMacroDeclarations(javaFile);
 				macros.addAll(Arrays.asList(macrosInFile));
 			} catch(IOException e) {
 				e.printStackTrace();
 			}
 		});
-
+		
+		System.out.println("Structure parsing...");
+		
+		macros.forEach(macroContext -> {
+			MacroStructure[] structs = StructureParser.parseMacroBody(macroContext);
+			for(int i = 0; i < structs.length; i++) {
+				MacroStructure struct = structs[i];
+				
+				System.out.println(String.format("(%d) Macro %s.%s has the following matcher:", i+1, macroContext.packageName(), macroContext.name()));
+				System.out.println(struct.matcher());
+				System.out.println(String.format("(%d) And the following transcriber:", i+1));
+				System.out.println(struct.transcriber());
+			}
+		});
 	}
 
 	@Override
