@@ -6,7 +6,7 @@ import java.nio.CharBuffer;
  * Utilities to aid in using various Buffers
  * @author Tobias de Bruijn
  */
-public class BufferUtils {
+public class Buffers {
 
 	/**
 	 * Zero a CharBuffer. Every position in the buffer will be set to the NULL character.
@@ -19,5 +19,10 @@ public class BufferUtils {
 		}
 		
 		b.position(0);
+	}
+	
+	public static String stringify(CharBuffer b) {
+		b.position(0);
+		return b.toString();
 	}
 }

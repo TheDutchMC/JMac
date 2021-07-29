@@ -1,0 +1,13 @@
+package dev.array21.jmac.parser.matcher;
+
+public enum TokenType {
+	VARIABLE_PREFIX,
+	VARIABLE_IDENT,
+	VARIABLE_FRAG_SPEC,
+	MACRO_REP_SEP,
+	MACRO_REP_OP,
+	OPENING_DELIMITER,
+	CLOSING_DELIMITER,
+	IDENT_SEPERATOR,
+	COMMA
+}

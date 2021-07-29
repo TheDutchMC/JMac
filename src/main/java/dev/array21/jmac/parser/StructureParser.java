@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import dev.array21.jmac.exception.MacroSyntaxException;
 import dev.array21.jmac.parser.components.MacroContext;
 import dev.array21.jmac.parser.components.MacroStructure;
-import dev.array21.jmac.util.BufferUtils;
+import dev.array21.jmac.util.Buffers;
 
 /**
  * Parser for a macro body to seperate out the matcher and the transcriber
@@ -73,7 +73,7 @@ public class StructureParser {
 						}
 						
 						commaSeen.set(false);
-						BufferUtils.zero(charBuffer);
+						Buffers.zero(charBuffer);
 						inMacroMatcher.set(true);
 					} else {
 						charBuffer.append((char) c);
@@ -139,7 +139,7 @@ public class StructureParser {
 					
 					// Start of transcriber
 					if(!inMacroTranscriber.get()) {
-						BufferUtils.zero(charBuffer);
+						Buffers.zero(charBuffer);
 						inMacroTranscriber.set(true);
 					} else {
 						charBuffer.append((char) c);
@@ -178,7 +178,7 @@ public class StructureParser {
 						String transcriberStr = transcriber.get();
 						String spacesFixed = transcriberStr.replaceAll("\\s{2,}", " ").trim();
 							
-						MacroStructure struct = new MacroStructure(matcher.get(), spacesFixed);
+						MacroStructure struct = new MacroStructure(macro, matcher.get(), spacesFixed);
 						structBuffer.add(struct);
 						
 						matcher.set(null);

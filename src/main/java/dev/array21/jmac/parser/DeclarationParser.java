@@ -34,6 +34,10 @@ public class DeclarationParser {
 		buffReader.lines().forEach(line -> {
 			lineInFile.incrementAndGet();
 			
+			if(line.trim().startsWith("//")) {
+				return;
+			}
+			
 			// If the line starts with 'package', that must be the package declaration
 			if(line.startsWith("package")) {
 				String packageName = line.replace("package", "").replace(";", "").trim();

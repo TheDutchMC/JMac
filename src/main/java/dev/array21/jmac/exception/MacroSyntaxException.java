@@ -6,4 +6,8 @@ public class MacroSyntaxException extends RuntimeException {
 	public MacroSyntaxException(String message) {
 		super(message);
 	}
+	
+	public MacroSyntaxException(String pat, Object... objects) {
+		super(String.format(pat, objects));
+	}
 }

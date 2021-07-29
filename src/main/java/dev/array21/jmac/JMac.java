@@ -13,7 +13,9 @@ import org.gradle.api.tasks.TaskAction;
 import dev.array21.jmac.parser.DeclarationParser;
 import dev.array21.jmac.parser.StructureParser;
 import dev.array21.jmac.parser.components.MacroContext;
+import dev.array21.jmac.parser.components.MacroMatcher;
 import dev.array21.jmac.parser.components.MacroStructure;
+import dev.array21.jmac.parser.matcher.MatcherParser;
 
 public class JMac implements Plugin<Project> {
 	
@@ -50,6 +52,18 @@ public class JMac implements Plugin<Project> {
 				System.out.println(struct.matcher());
 				System.out.println(String.format("(%d) And the following transcriber:", i+1));
 				System.out.println(struct.transcriber());
+				
+				/*
+				MacroMatcher[] matchers = MatcherParser.parseMatcher(struct);
+				for(int j = 0; j < matchers.length; j++) {
+					MacroMatcher matcher = matchers[j];
+					System.out.println(String.format("(%d) Matcher (%d) parsed has the following ident: %s, with fragSpec %s", i, j, matcher.ident(), matcher.fragSpec()));
+					if(matcher.repOp().isPresent()) {
+						System.out.println(String.format("It's repSep is '%c', and it's repOp is '%c'", matcher.repSep().get(), matcher.repOp().get()));
+					}
+				}*/
+				
+				MatcherParser.parseMatcher(struct);
 			}
 		});
 	}

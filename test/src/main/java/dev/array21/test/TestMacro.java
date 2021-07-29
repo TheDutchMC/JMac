@@ -15,7 +15,3 @@ macro_rules! handleA {
         }
     }
 }
-
-int y(){ 
-    return 1;
-}
